@@ -28,7 +28,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataAccess\" />
+    <Folder Include="Business\Interfaces\" />
+    <Folder Include="Business\Dtos\" />
+    <Folder Include="Business\Services\" />
+    <Folder Include="Apis\" />
+    <Folder Include="DataAccess\Entities\" />
+    <Folder Include="DataAccess\DataContext\" />
+    <Folder Include="AppConstants\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ErrorHandlingDll">
+      <HintPath>..\..\..\ErrorHandlingDll\ErrorHandlingDll\ErrorHandlingDll\ErrorHandlingDll\bin\Release\net6.0\ErrorHandlingDll.dll</HintPath>
+    </Reference>
+    <Reference Include="GenericRepositoryDll">
+      <HintPath>..\..\..\GenericRepositoryDll\GenericRepositoryDll\GenericRepositoryDll\GenericRepositoryDll\bin\Release\net6.0\GenericRepositoryDll.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpService">
+      <HintPath>..\..\..\HttpService\HttpServiceDll\HttpService\bin\Release\net6.0\HttpService.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
