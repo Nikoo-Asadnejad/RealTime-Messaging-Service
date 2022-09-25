@@ -7,43 +7,40 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Messaging_Service.Business.Services;
 
-public class ChatService :  IChatService
+public class ChatService : IChatService
 {
   private readonly IUnitOfWork _unitOfWork;
   private readonly IMessageService _messageService;
 
-  public ChatService(IUnitOfWork unitOfWork , IMessageService messageService)
+  public ChatService(IUnitOfWork unitOfWork, IMessageService messageService)
   {
     _unitOfWork = unitOfWork;
     _messageService = messageService;
   }
 
-  public async Task StartChatAsync(long senderId , string connectionId , List<string> messages)
+  public async Task StartChatAsync(long senderId, string connectionId, List<string> messages)
   {
     long? chatId = await CreateChatAsync(connectionId);
     await AddMessagesToChatAsync(chatId.Value, senderId, messages);
   }
 
-  public async Task AddMessagesToChatAsync(long chatId,long senderId , List<string> messages)
+  public async Task AddMessagesToChatAsync(long chatId, long senderId, List<string> messages)
   {
     List<MessageModel> messageses = await _messageService.CreateMessageList(messages, senderId, chatId);
     ChatModel chat = await _unitOfWork.ChatRepository.FindAsync(chatId);
     chat.Messages.AddRange(messageses);
     await _unitOfWork.ChatRepository.SaveAsync();
-    
+
   }
 
   public async Task<long?> GetChatByConnectionIdAsync(string connectionId)
    => await _unitOfWork.ChatRepository.GetSingleAsync<long>(query: c => c.ConnectionId == connectionId,
                                                             selector: c => c.Id);
 
-  public async Task<List<GetChatMessageDto>> GetMessagesAsync(long chatId)
-    => await _unitOfWork.MessageRepository.GetListAsync<GetChatMessageDto>
-                                       (query: c => c.ChatId == chatId,
-                                        selector: c => new GetChatMessageDto("","", c.Content));
   
-  
-  public async Task SendMessageAsync(string message , long chatId)
+
+
+  public async Task SendMessageAsync(string message, long chatId)
   {
 
   }

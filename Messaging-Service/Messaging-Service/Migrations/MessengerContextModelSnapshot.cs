@@ -65,7 +65,7 @@ namespace Messaging_Service.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long?>("ChatModelId")
+                    b.Property<long>("ChatId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Content")
@@ -104,16 +104,51 @@ namespace Messaging_Service.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatModelId");
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Message");
                 });
 
+            modelBuilder.Entity("Messaging_Service.DataAccess.Entities.UserModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Messaging_Service.DataAccess.Entities.MessageModel", b =>
                 {
-                    b.HasOne("Messaging_Service.DataAccess.Entities.ChatModel", null)
+                    b.HasOne("Messaging_Service.DataAccess.Entities.ChatModel", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatModelId");
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Messaging_Service.DataAccess.Entities.UserModel", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Messaging_Service.DataAccess.Entities.ChatModel", b =>

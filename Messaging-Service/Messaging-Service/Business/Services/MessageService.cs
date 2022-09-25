@@ -27,6 +27,12 @@ public class MessageService : IMessageService
     return message.Id;
   }
 
+  public async Task<List<GetChatMessageDto>> GetMessagesByChatIdAsync(long chatId)
+    => await _unitOfWork.MessageRepository.GetListAsync<GetChatMessageDto>
+                                       (query: c => c.ChatId == chatId,
+                                        includes: new List<string>() { "Sender" },
+                                        selector: c =>
+                                        new GetChatMessageDto(c.Sender.FirstName, c.Sender.LastName, c.Content));
   public async Task<MessageModel> CreateMessageAsync(string content , long senderId , long chatId)
   {
     MessageModel message = new(content,senderId,chatId);

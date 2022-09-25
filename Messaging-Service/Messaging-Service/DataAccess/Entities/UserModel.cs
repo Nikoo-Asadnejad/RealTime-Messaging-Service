@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Messaging_Service.DataAccess.Entities;
+
+[Table("Users")]
 public class UserModel
 {
   [Key]

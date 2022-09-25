@@ -72,3 +72,4 @@ D:\web development\projects\RealTime-Messaging-Service\Messaging-Service\Messagi
 D:\web development\projects\RealTime-Messaging-Service\Messaging-Service\Messaging-Service\obj\Debug\net6.0\ref\Messaging-Service.dll
 D:\web development\projects\RealTime-Messaging-Service\Messaging-Service\Messaging-Service\obj\Debug\net6.0\Messaging-Service.pdb
 D:\web development\projects\RealTime-Messaging-Service\Messaging-Service\Messaging-Service\obj\Debug\net6.0\Messaging-Service.genruntimeconfig.cache
+D:\web development\projects\RealTime-Messaging-Service\Messaging-Service\Messaging-Service\bin\Debug\net6.0\System.Net.WebSockets.WebSocketProtocol.dll

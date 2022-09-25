@@ -6,5 +6,7 @@ public interface IMessageService
 {
   Task<long?> CreateMessageAsync(CreateMessageDto createMessageDto);
   Task<List<MessageModel>> CreateMessageList(List<string> messages, long senderId, long chatId);
+
+  Task<List<GetChatMessageDto>> GetMessagesByChatIdAsync(long chatId);
 }
 
