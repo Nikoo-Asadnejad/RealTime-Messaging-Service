@@ -19,17 +19,19 @@ public class MessageModel : BaseEntityModel
   [Required]
   public long SenderId { get; set; }
 
+  [ForeignKey("SenderId")]
+  public UserModel Sender { get; set; }
+
   [Required]
   public string Content { get; set; }
 
   public long? SendDate { get; set; }
   public long? ReciveDate { get; set; }
-
-  [ForeignKey("ChatId")]
   public long ChatId { get; set; }
 
   [ForeignKey("ChatId")]
   public virtual ChatModel Chat { get;set; }
+
 
   public MessageModel()
   {
