@@ -58,8 +58,8 @@ namespace Messaging_Service.Configurations
       services.AddAuthentication();
  
       var connection = configuration.GetConnectionString("SQLServer");
-      services.AddDbContext<MessangerContext>(options => options.UseSqlServer(connection));
-      services.AddScoped<DbContext, MessangerContext>();
+      services.AddDbContext<MessengerContext>(options => options.UseSqlServer(connection));
+      services.AddScoped<DbContext, MessengerContext>();
 
       ErrorHandlingDllConfigurator.InjectServices(services, configuration);
       HttpServiceConfigurator.InjectHttpService(services);
