@@ -6,6 +6,7 @@ namespace Messaging_Service.Business.Services;
 public class ChatService :  IChatService
 {
 
+ 
   public async Task StartChat(long senderId)
   {
   

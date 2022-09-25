@@ -5,6 +5,7 @@ using Messaging_Service.Business.Interfaces;
 using Messaging_Service.Business.Services;
 using Messaging_Service.DataAccess.DataContext;
 using Messaging_Service.DataAccess.Repository;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -71,6 +72,7 @@ namespace Messaging_Service.Configurations
       services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IMessageService, MessageService>();
       services.AddScoped<IChatService, ChatService>();
+      services.AddScoped<Hub<IChatHub>, ChatHub>();
       services.AddSignalR();
 
 
