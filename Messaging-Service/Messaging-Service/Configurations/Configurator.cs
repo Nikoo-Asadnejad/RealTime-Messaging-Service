@@ -2,6 +2,7 @@ using ErrorHandlingDll.Configurations;
 using GenericRepositoryDll.Configuration;
 using HttpService.Configuration;
 using Messaging_Service.DataAccess.DataContext;
+using Messaging_Service.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -64,6 +65,8 @@ namespace Messaging_Service.Configurations
       ErrorHandlingDllConfigurator.InjectServices(services, configuration);
       HttpServiceConfigurator.InjectHttpService(services);
       GenericRepositoryConfigurator.InjectServices(services);
+
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
     }
