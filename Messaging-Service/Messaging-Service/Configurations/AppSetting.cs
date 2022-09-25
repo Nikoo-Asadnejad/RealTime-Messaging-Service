@@ -34,7 +34,7 @@ public class Loglevel
 
 public class Microservices
 {
-  public string SmsService { get; set; }
+  public string AuthService { get; set; }
 }
 
 

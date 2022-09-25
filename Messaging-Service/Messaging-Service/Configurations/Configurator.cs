@@ -1,6 +1,7 @@
 using ErrorHandlingDll.Configurations;
 using GenericRepositoryDll.Configuration;
 using HttpService.Configuration;
+using Messaging_Service.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -56,11 +57,9 @@ namespace Messaging_Service.Configurations
 
       services.AddAuthentication();
  
-
-      //app db context should be relaced
       var connection = configuration.GetConnectionString("SQLServer");
-      services.AddDbContext<DbContext>(options => options.UseSqlServer(connection));
-      services.AddScoped<DbContext,DbContext>();
+      services.AddDbContext<MessangerContext>(options => options.UseSqlServer(connection));
+      services.AddScoped<DbContext, MessangerContext>();
 
       ErrorHandlingDllConfigurator.InjectServices(services, configuration);
       HttpServiceConfigurator.InjectHttpService(services);

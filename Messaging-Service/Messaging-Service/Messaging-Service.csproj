@@ -33,7 +33,6 @@
     <Folder Include="Business\Services\" />
     <Folder Include="Apis\" />
     <Folder Include="DataAccess\Entities\" />
-    <Folder Include="DataAccess\DataContext\" />
     <Folder Include="AppConstants\" />
     <Folder Include="Utils\" />
   </ItemGroup>
