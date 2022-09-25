@@ -1,4 +1,5 @@
 using Messaging_Service.Business.Dtos.Chat;
+using Messaging_Service.Business.Dtos.Message;
 using Messaging_Service.Business.Interfaces;
 using Messaging_Service.DataAccess.Entities;
 using Messaging_Service.DataAccess.Repository;
@@ -36,6 +37,11 @@ public class ChatService :  IChatService
    => await _unitOfWork.ChatRepository.GetSingleAsync<long>(query: c => c.ConnectionId == connectionId,
                                                             selector: c => c.Id);
 
+  public async Task<List<GetChatMessageDto>> GetMessagesAsync(long chatId)
+    => await _unitOfWork.MessageRepository.GetListAsync<GetChatMessageDto>
+                                       (query: c => c.ChatId == chatId,
+                                        selector: c => new GetChatMessageDto("","", c.Content));
+  
   
   public async Task SendMessageAsync(string message , long chatId)
   {
@@ -50,12 +56,7 @@ public class ChatService :  IChatService
     return chat.Id;
   }
 
-  private async Task AddMessagesToChatAsync(long chatId , List<MessageModel> messages)
-  {
-    ChatModel chat = await _unitOfWork.ChatRepository.FindAsync(chatId);
-    chat.Messages.AddRange(messages);
-    await _unitOfWork.ChatRepository.SaveAsync();
-  }
+
 
 }
 
