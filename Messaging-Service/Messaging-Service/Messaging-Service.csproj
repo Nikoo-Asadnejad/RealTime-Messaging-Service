@@ -35,7 +35,6 @@
     <Folder Include="DataAccess\Entities\" />
     <Folder Include="DataAccess\DataContext\" />
     <Folder Include="AppConstants\" />
-    <Folder Include="Configurations\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 
