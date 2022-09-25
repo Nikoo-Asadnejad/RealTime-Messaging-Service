@@ -1,6 +1,8 @@
 using ErrorHandlingDll.Configurations;
 using GenericRepositoryDll.Configuration;
 using HttpService.Configuration;
+using Messaging_Service.Business.Interfaces;
+using Messaging_Service.Business.Services;
 using Messaging_Service.DataAccess.DataContext;
 using Messaging_Service.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +69,8 @@ namespace Messaging_Service.Configurations
       GenericRepositoryConfigurator.InjectServices(services);
 
       services.AddScoped<IUnitOfWork, UnitOfWork>();
+      services.AddScoped<IMessageService, MessageService>();
+      services.AddScoped<IChatService, ChatService>();
 
 
     }

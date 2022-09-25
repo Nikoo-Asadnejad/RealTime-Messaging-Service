@@ -28,9 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Business\Interfaces\" />
-    <Folder Include="Business\Dtos\" />
-    <Folder Include="Business\Services\" />
     <Folder Include="Apis\" />
     <Folder Include="AppConstants\" />
     <Folder Include="Utils\" />
