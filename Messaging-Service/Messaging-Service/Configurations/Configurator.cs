@@ -71,6 +71,7 @@ namespace Messaging_Service.Configurations
       services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddScoped<IMessageService, MessageService>();
       services.AddScoped<IChatService, ChatService>();
+      services.AddSignalR();
 
 
     }
@@ -98,6 +99,8 @@ namespace Messaging_Service.Configurations
           c.SwaggerEndpoint("/swagger/v1/swagger.json", "Messaging-Service API's");
         });
       }
+
+      app.MapHub<ChatHub>("/Chat");
 
 
     }
