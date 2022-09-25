@@ -20,11 +20,19 @@ public class ChatService :  IChatService
   public async Task StartChatAsync(long senderId , string connectionId , List<string> messages)
   {
     long? chatId = await CreateChatAsync(connectionId);
-    List<MessageModel> messageses =await _messageService.CreateMessageList(messages,senderId,chatId.Value);
-    await AddMessagesToChatAsync(chatId.Value, messageses);
+    await AddMessagesToChatAsync(chatId.Value, senderId, messages);
   }
 
-  public async Task<long?> GetChatByConnectionId(string connectionId)
+  public async Task AddMessagesToChatAsync(long chatId,long senderId , List<string> messages)
+  {
+    List<MessageModel> messageses = await _messageService.CreateMessageList(messages, senderId, chatId);
+    ChatModel chat = await _unitOfWork.ChatRepository.FindAsync(chatId);
+    chat.Messages.AddRange(messageses);
+    await _unitOfWork.ChatRepository.SaveAsync();
+    
+  }
+
+  public async Task<long?> GetChatByConnectionIdAsync(string connectionId)
    => await _unitOfWork.ChatRepository.GetSingleAsync<long>(query: c => c.ConnectionId == connectionId,
                                                             selector: c => c.Id);
 

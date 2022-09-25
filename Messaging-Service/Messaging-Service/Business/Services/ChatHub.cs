@@ -14,7 +14,7 @@ namespace Messaging_Service.Business.Services
     }
     public async override Task OnConnectedAsync()
     {
-   //   await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
+      //   await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
 
       _connectionId = Context.ConnectionId;
 
@@ -24,9 +24,15 @@ namespace Messaging_Service.Business.Services
     }
     public async Task SendMessage(long userId, string message)
     {
-       
-       await Clients.Caller.RecieveMessage(userId, message);
+      long? chatId = await _chatService.GetChatByConnectionIdAsync(_connectionId);
+
+      if (chatId == null)
+        await _chatService.StartChatAsync(userId, _connectionId, new List<string>() { message });
+      else
+        await _chatService.AddMessagesToChatAsync(chatId.Value, userId, new List<string>() { message });
+
+      await Clients.Caller.RecieveMessage(userId, message);
     }
-       
+
   }
 }
