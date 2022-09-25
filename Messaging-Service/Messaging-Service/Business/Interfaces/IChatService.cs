@@ -5,5 +5,6 @@ public interface IChatService
 {
   Task StartChatAsync(long senderId, string connectionId, List<string> messages);
   Task SendMessageAsync(string message, long chatId);
+  Task<long?> GetChatByConnectionId(string connectionId);
 }
 

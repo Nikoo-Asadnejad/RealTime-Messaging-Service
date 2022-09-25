@@ -24,11 +24,11 @@ public class ChatService :  IChatService
     await AddMessagesToChatAsync(chatId.Value, messageses);
   }
 
-  public async Task StopChatAsync(long chatId)
-  {
+  public async Task<long?> GetChatByConnectionId(string connectionId)
+   => await _unitOfWork.ChatRepository.GetSingleAsync<long>(query: c => c.ConnectionId == connectionId,
+                                                            selector: c => c.Id);
 
-  }
-
+  
   public async Task SendMessageAsync(string message , long chatId)
   {
 
