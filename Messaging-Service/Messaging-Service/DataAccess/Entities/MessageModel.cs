@@ -44,5 +44,14 @@ public class MessageModel : BaseEntityModel
     this.RecieverId = createMessageDto.RecieverId ?? UserIds.AdminId;
     this.ChatId = createMessageDto.ChatId;
   }
+
+  public MessageModel(string content, long senderId, long chatId , long? reciever = UserIds.AdminId)
+  {
+    this.Content = content;
+    this.SenderId = senderId;
+    this.SendDate = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+    this.RecieverId = RecieverId;
+    this.ChatId = chatId;
+  }
 }
 

@@ -1,3 +1,4 @@
+using Messaging_Service.Business.Dtos.Chat;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +14,24 @@ public class ChatModel : BaseEntityModel
 
   [Required]
   public string ConnectionId { get; set; }
-  public virtual ICollection<MessageModel> Messages { get; set; }
+  public virtual List<MessageModel> Messages { get; set; }
+
+  public ChatModel(CreateChatDto createChatDto)
+  {
+    Messages = new List<MessageModel>();
+    Messages.AddRange(createChatDto.Messages);
+    ConnectionId = createChatDto.ConnectionId.Trim();
+  }
+
+  public ChatModel(string connectionId)
+  {
+    ConnectionId = connectionId.Trim();
+    Messages = new List<MessageModel>();
+  }
+
+  public ChatModel()
+  {
+    Messages = new List<MessageModel>();
+  }
 }
 
